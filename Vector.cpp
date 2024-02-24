@@ -71,7 +71,7 @@ void Vector::storage_decrease() {
 void Vector::pop_back() {
 	if (real_size == 0) throw "The absence of the last element of the empty Vector!";
 
-    real_size--;
+        real_size--;
 	storage_decrease();
 }
 
