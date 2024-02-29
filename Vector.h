@@ -15,7 +15,7 @@ public:
 	Vector(const Vector& V);
 	~Vector();
 
-	Vector operator=(const Vector& V);
+	Vector& operator=(const Vector& V);
 
 	unsigned int size() const;
 	bool empty() const;
@@ -32,6 +32,6 @@ public:
 	friend std::ostream& operator << (std::ostream& out, const Vector& V);
 
 	int& operator[](unsigned int i);
-	int& operator[](unsigned int i) const;
+	int operator[](unsigned int i) const;
 
 };

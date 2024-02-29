@@ -15,7 +15,7 @@ Vector::~Vector() {
 	delete[] storage_ptr;
 }
 
-Vector Vector::operator=(const Vector& V) {
+Vector& Vector::operator=(const Vector& V) {
 	int* temp_storage_ptr = new int[V.storage_size];
 	for (int i = 0; i < V.real_size; i++) {
 		temp_storage_ptr[i] = V.storage_ptr[i];
@@ -26,7 +26,7 @@ Vector Vector::operator=(const Vector& V) {
 	delete[] this->storage_ptr;
 	this->storage_ptr = temp_storage_ptr;
 
-	return V;
+	return (*this);
 }
 
 unsigned int Vector::size() const {
@@ -56,7 +56,7 @@ void Vector::push_back(int value) {
 }
 
 void Vector::storage_decrease() {
-	if ((real_size + 1 <= storage_size / 2) && (storage_size != 1)) {
+	if ((real_size + 1 <= storage_size / 4) && (storage_size != 1)) {
 		int* temp_storage_ptr = new int[storage_size / 2];
 		for (int i = 0; i < real_size; i++) {
 			temp_storage_ptr[i] = this -> storage_ptr[i];
@@ -71,7 +71,7 @@ void Vector::storage_decrease() {
 void Vector::pop_back() {
 	if (real_size == 0) throw "The absence of the last element of the empty Vector!";
 
-        real_size--;
+    real_size--;
 	storage_decrease();
 }
 
@@ -122,8 +122,7 @@ int& Vector::operator[](unsigned int i) {
 	return storage_ptr[i];
 }
 
-int& Vector::operator[](unsigned int i) const{
+int Vector::operator[](unsigned int i) const{
 	if (i >= real_size) throw "The Vector index out of range!";
-
 	return storage_ptr[i];
 }
